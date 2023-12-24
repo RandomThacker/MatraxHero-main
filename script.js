@@ -1,0 +1,348 @@
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  direction: "vertical",
+  gestureDirection: "vertical",
+  lerp: 0.05,
+  smooth: 2,
+  smoothTouch: false,
+  touchMultiplier: 2,
+  wheelMultiplier: 1,
+})
+
+lenis.on('scroll', (e) => {
+  console.log(e)
+})
+
+function raf(time) {
+  lenis.raf(time)
+  requestAnimationFrame(raf)
+}
+
+requestAnimationFrame(raf)
+
+function showNav() {
+  document.getElementsByClassName("navigation")[0].classList.toggle("active");
+}
+document.addEventListener("DOMContentLoaded", function () {
+  var splide = new Splide(".splide", {
+    direction: "ttb",
+    height: "60vh",
+    wheel: true,
+    perPage: 5,
+    // type: "loop",
+    perMove: 1,
+    pagination: false,
+    gap: 25,
+    padding: "1rem",
+  });
+  splide.mount();
+});
+
+function dom() {
+  const canvas = document.querySelector(".heroSection>canvas");
+  const context = canvas.getContext("2d");
+  const imageSeq = {
+    frame: 0,
+  };
+
+  function setCanvasSize() {
+    const img = images[imageSeq.frame];
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerWidth;
+    render();
+  }
+
+  window.addEventListener("resize", setCanvasSize);
+
+  function files(index) {
+    const data = `
+      ./images/SequenceImages/jlsousa tires project 4  Urcola+.3117.${
+        31 + index
+      }.png
+      `;
+    return data.trim();
+  }
+
+  const frameCount = 121;
+  const images = [];
+
+  for (let i = 0; i < frameCount; i++) {
+    const img = new Image();
+    img.src = files(i);
+    images.push(img);
+  }
+
+  gsap.to(imageSeq, {
+    frame: frameCount - 1,
+    snap: "frame",
+    ease: "none",
+    scrollTrigger: {
+      scrub: 1.8,
+      pin: true,
+      trigger: "#main",
+    },
+    onUpdate: render,
+  });
+
+  images[0].onload = setCanvasSize;
+
+  function render() {
+    scaleImage(images[imageSeq.frame], context);
+  }
+
+  function scaleImage(img, ctx) {
+    const canvas = ctx.canvas;
+    const hRatio = canvas.width / img.width;
+    const vRatio = canvas.height / img.height;
+    const ratio = Math.max(hRatio, vRatio);
+    const centerShift_x = (canvas.width - img.width * ratio) / 2;
+    const centerShift_y = (canvas.height - img.height * ratio) / 2;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(
+      img,
+      0,
+      0,
+      img.width,
+      img.height,
+      centerShift_x,
+      centerShift_y,
+      img.width * ratio,
+      img.height * ratio
+    );
+  }
+
+  gsap.to(".heroSection>canvas", {
+    scale: 0.8,
+    scrollTrigger: {
+      scrub: 0.1,
+      trigger: "#main",
+      start: "bottom 100%",
+    },
+  });
+
+  // ScrollTrigger.create({
+  //   trigger: "#main",
+  //   pin: true,
+  //   start: "bottom 100%",
+  // });
+}
+dom();
+
+function videoSection() {
+  let video = document.querySelector(".videoSection video");
+
+  ScrollTrigger.create({
+    trigger: "#main",
+    // markers:true,
+    start: "9% top",
+    end: "25% top",
+    // pin:".videoSection",
+    onEnter: () => video.play(),
+    onEnterBack: () => video.play(),
+    onLeave: () => video.pause(),
+    onLeaveBack: () => video.pause(),
+  });
+
+  let tl1 = gsap.timeline({
+    scrollTrigger: {
+      scrub: 0.1,
+      trigger: "#main",
+      start: "11.5% top",
+      end: "16% top",
+      // markers: true,
+      pin: true,
+    },
+  });
+
+  tl1.to(".videoOverlay", { opacity: 0.85 }, "+.4");
+  tl1.to(".videoOverlayText", { bottom: "18%" }, "+.4");
+}
+videoSection();
+
+function horizontalScroll() {
+  gsap.to(".horizontal__content", {
+    transform: "translateX(-20%)",
+    scrollTrigger: {
+      trigger: "#main",
+      start: "23% top",
+      end: "32% top",
+      // scroller:"body",
+      scrub: 3,
+      pin: true,
+      // markers: true,
+    },
+    defaults: { duration: 5 },
+  });
+}
+horizontalScroll();
+
+function curvedScroll(){
+  // gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
+
+const cardAnimationTimeline = gsap.timeline({
+  paused: true,
+  id: "cardAnimation",
+});
+
+function updateStagger() {
+  const screenWidth = window.innerWidth;
+
+  let staggerValue;
+
+  if (screenWidth < 500) {
+    staggerValue = 3;
+  } else if (screenWidth >= 500 && screenWidth < 800) {
+    staggerValue = 1.5;
+  } else if (screenWidth >= 800 && screenWidth < 1500) {
+    staggerValue = 1;
+  } else {
+    staggerValue = 0.9; // Default value for larger screens
+  }
+
+  cardAnimationTimeline.to(".durable-card", {
+    motionPath: {
+      path: "#path",
+      align: "#path",
+      alignOrigin: [1.2, 1.5],
+      // set x of align origin to 1.2 so it goes behind the screen
+      autoRotate: true,
+      start: 0,
+    end: 1,
+    },
+    transformOrigin: "50% 50%",
+    duration: 3,
+    ease: "power1.inOut",
+    stagger: staggerValue, // Change stagger value based on screen width
+  });
+  // cardAnimationTimeline.reverse();
+}
+
+// Initial stagger setup
+updateStagger();
+
+// Update stagger on window resize
+window.addEventListener("resize", updateStagger);
+
+ScrollTrigger.create({
+  animation: cardAnimationTimeline,
+  trigger: "#main",
+  pin: true,
+  start: "34.49% top",
+    end: "43% top",
+  scrub: true,
+  // markers: true, 
+});
+}
+curvedScroll()
+
+function bullStory(){
+  ScrollTrigger.create({
+    trigger: "#main",
+    markers: true,
+    start: "46% top",
+    end: "53% top",
+    pin:true,
+  })
+  
+  gsap.to(".bullStoryOverlay",{
+  scrollTrigger:{
+    trigger: '#main',
+    markers:true,
+    start:"46% top",
+    end:"52% top",
+    scrub:2,
+  }, 
+  top:"50%"
+  })
+}
+bullStory()
+
+function logoShrink(){
+  let section = document.getElementById('section'),
+    dot = document.querySelector(".dot");
+
+gsap.set(dot, {
+  width: "142vmax", // ensures it fills every part of the screen. 
+  height: "142vmax",
+  xPercent: -50, // center the dot in the section area
+  yPercent: -50,
+  top: "50%",
+  left: "50%",
+  transformOrigin: "center center", // Set the transform origin to the center
+});
+
+let tl1 = gsap.timeline({
+		scrollTrigger: {
+			trigger: "#main",
+			start: "57.5% top",
+			end: "64% top",
+			markers: true,
+			scrub: 1.5, 
+			pin: true,
+			pinSpacing: true,
+      invalidateOnRefresh: true,
+		},	
+		defaults: { ease: "none" }
+	});
+
+tl1
+  .fromTo(dot, {
+      scale: 0,
+   }, { 
+    scale: 1,
+    // ease: "power3.in",
+});
+
+tl1.to('.bullimg', {duration:0.8, width:"15%", y:-250}, '+.6')
+tl1.to('.nameLogo', {duration:0.8, y:-500}, '+.6')
+tl1.to('.logoTextSection', {duration:0.8, y:-450}, '+.9')
+}
+logoShrink()
+
+function ecosystem(){
+const cardContainer = document.querySelector('.card-container');
+const cardContainerWidth = cardContainer.offsetWidth;
+
+const card1 = document.getElementById('card1');
+const card1Width = card1.offsetWidth;
+
+const card2 = document.getElementById('card2');
+const card2Width = card2.offsetWidth;
+
+const EXPAND_WIDTH = cardContainerWidth * 0.1;
+
+card1.addEventListener("mouseenter", () => {
+  card1.style.width = `${card1Width + EXPAND_WIDTH}px`;
+  card2.style.width = `${card2Width - EXPAND_WIDTH}px`;
+
+          card2.classList.add('bgimg-card');
+  
+});
+
+card1.addEventListener("mouseleave", () => {
+  card1.style.width = `${card1Width}px`;
+  card2.style.width = `${card2Width}px`;
+  card1.classList.add('expandCard')
+  card2.classList.remove('bgimg-card');
+
+});
+
+
+card2.addEventListener("mouseenter", () => {
+  card2.style.width = `${card1Width + EXPAND_WIDTH}px`;
+  card1.style.width = `${card2Width - EXPAND_WIDTH}px`;
+  card1.classList.add('bgimg-card');
+
+});
+
+card2.addEventListener("mouseleave", () => {
+  card2.style.width = `${card1Width}px`;
+  card1.style.width = `${card2Width}px`;
+  card1.classList.remove('bgimg-card');
+
+});
+
+
+}
+ecosystem()
