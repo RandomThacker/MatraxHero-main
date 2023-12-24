@@ -1,25 +1,30 @@
 const lenis = new Lenis({
-  duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  direction: "vertical",
-  gestureDirection: "vertical",
-  lerp: 0.05,
-  smooth: 2,
-  smoothTouch: false,
-  touchMultiplier: 2,
-  wheelMultiplier: 1,
-})
+  duration: 4,
+  smooth:true,
+  easing: (t, friction = 0.1) => {
+    // Apply friction to the easing function
+    const easedValue = Math.min(1, 1.001 - Math.pow(2, -10 * t));
+    
+    // Apply friction to the eased value
+    const frictionedValue = easedValue - friction * t;
 
-lenis.on('scroll', (e) => {
-  console.log(e)
-})
-
+    return Math.min(1, frictionedValue);
+  }
+});
 function raf(time) {
-  lenis.raf(time)
-  requestAnimationFrame(raf)
+  lenis.raf(time);
+  ScrollTrigger.update();
+  requestAnimationFrame(raf);
 }
+requestAnimationFrame(raf);
 
-requestAnimationFrame(raf)
+
+document.body.addEventListener("mousemove", function (dets) {
+  gsap.to(".cursor", {
+    left: dets.x,
+    top: dets.y,
+  });
+});
 
 function showNav() {
   document.getElementsByClassName("navigation")[0].classList.toggle("active");
@@ -239,7 +244,7 @@ curvedScroll()
 function bullStory(){
   ScrollTrigger.create({
     trigger: "#main",
-    markers: true,
+    // markers: true,
     start: "46% top",
     end: "53% top",
     pin:true,
@@ -248,7 +253,7 @@ function bullStory(){
   gsap.to(".bullStoryOverlay",{
   scrollTrigger:{
     trigger: '#main',
-    markers:true,
+    // markers:true,
     start:"46% top",
     end:"52% top",
     scrub:2,
@@ -277,7 +282,7 @@ let tl1 = gsap.timeline({
 			trigger: "#main",
 			start: "57.5% top",
 			end: "64% top",
-			markers: true,
+			// markers: true,
 			scrub: 1.5, 
 			pin: true,
 			pinSpacing: true,
