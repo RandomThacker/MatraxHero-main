@@ -64,7 +64,7 @@ function dom() {
     const data = `
       ./images/SequenceImages/jlsousa tires project 4  Urcola+.3117.${
         31 + index
-      }.png
+      }.webp
       `;
     return data.trim();
   }
