@@ -44,6 +44,32 @@ document.addEventListener("DOMContentLoaded", function () {
   splide.mount();
 });
 
+
+// gsap.to(".rollingImage", {
+//   left:"50%",
+//   rotate: -360,
+//   // repeat:-1,
+//   duration: 4
+// })
+
+// gsap.to(".rollingImage", {
+//   display:"none",
+//   delay: 4
+// })
+
+// gsap.from(".heroCanvas", {
+//   display:"none",
+//   delay: 4
+// })
+
+gsap.from(".heroCanvas", {
+  x:1300,
+  rotate: 360,
+  // repeat:-1,
+  duration: 4,
+})
+
+
 function dom() {
   const canvas = document.querySelector(".heroSection>canvas");
   const context = canvas.getContext("2d");
@@ -141,7 +167,7 @@ function videoSection() {
     trigger: "#main",
     // markers:true,
     start: "9% top",
-    end: "25% top",
+    end: "45% top",
     // pin:".videoSection",
     onEnter: () => video.play(),
     onEnterBack: () => video.play(),
@@ -154,14 +180,15 @@ function videoSection() {
       scrub: 0.1,
       trigger: "#main",
       start: "11.5% top",
-      end: "16% top",
-      // markers: true,
+      end: "40% top",
       pin: true,
+      markers:true,
     },
   });
 
+
   tl1.to(".videoOverlay", { opacity: 0.85 }, "+.4");
-  tl1.to(".videoOverlayText", { bottom: "18%" }, "+.4");
+  tl1.to(".videoOverlayText", { bottom: "18%", duration:8 }, "+.8");
 }
 videoSection();
 
