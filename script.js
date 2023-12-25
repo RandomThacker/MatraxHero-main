@@ -88,8 +88,9 @@ function dom() {
 
   function files(index) {
     const data = `
-      ./images/SequenceImages/jlsousa tires project 4  Urcola+.3117.${31 + index
-      }.png
+      ./images/SequenceImages/jlsousa tires project 4  Urcola+.3117.${
+        31 + index
+      }.webp
       `;
     return data.trim();
   }
