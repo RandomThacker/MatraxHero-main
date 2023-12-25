@@ -18,7 +18,29 @@ body {
     background-color: #cda050;
     height: 20px;
     width: 20px;
+    left: -10%;
     /* mix-blend-mode: difference; */
+}
+
+*::selection{
+  background-color: #cda050;
+  color: #000000;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #212121; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #cda050; 
+  border-radius: 10px;
 }
 
 /* ------------Nav Menu Styles---------------- */
@@ -172,13 +194,22 @@ body {
   width: 100%;
 }
 
-canvas {
+.heroCanvas {
   height: 100vh;
   width: 100vw;
   display: block;
   margin: auto;
   object-fit: contain;
   z-index: 2;
+}
+
+.rollingImage{
+  position: absolute;
+  top: 50%;
+  left: 130%;
+  transform: translate(-50%, -50%);
+  z-index: 99;
+  width: 52%;
 }
 
 /* -----------------Hero Section---------------- */
