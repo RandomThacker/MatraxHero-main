@@ -9,7 +9,7 @@ const lenis = new Lenis({
     const frictionedValue = easedValue - friction * t;
 
     return Math.min(1, frictionedValue);
-  }
+  },
 });
 function raf(time) {
   lenis.raf(time);
@@ -17,7 +17,6 @@ function raf(time) {
   requestAnimationFrame(raf);
 }
 requestAnimationFrame(raf);
-
 
 document.body.addEventListener("mousemove", function (dets) {
   gsap.to(".cursor", {
@@ -44,7 +43,6 @@ document.addEventListener("DOMContentLoaded", function () {
   splide.mount();
 });
 
-
 // gsap.to(".rollingImage", {
 //   left:"50%",
 //   rotate: -360,
@@ -63,12 +61,10 @@ document.addEventListener("DOMContentLoaded", function () {
 // })
 
 gsap.from(".heroCanvas", {
-  x: 1300,
+  x: "150%", // Move the element to the right by 150% of its width
   rotate: 360,
-  // repeat:-1,
   duration: 4,
-})
-
+});
 
 function dom() {
   const canvas = document.querySelector(".heroSection>canvas");
@@ -183,32 +179,121 @@ function videoSection() {
       start: "11.5% top",
       end: "40% top",
       pin: true,
-      // markers:true,
+      // markers: true,
     },
   });
 
-
   tl1.to(".videoOverlay", { opacity: 0.85 }, "+.4");
-  tl1.to(".videoOverlayText", { bottom: "18%", duration: 8 }, "+.8");
+  tl1.to(".videoOverlayText", { bottom: "1%", duration: 8 }, "+.8");
 }
 videoSection();
-
 function horizontalScroll() {
-  gsap.to(".horizontal__content", {
-    transform: "translateX(-20%)",
+  let images = gsap.utils.toArray(".horizontal__item");
+  let animationProps = {
+    ease: "none",
     scrollTrigger: {
       trigger: "#main",
-      start: "23% top",
-      end: "32% top",
-      // scroller:"body",
-      scrub: 3,
       pin: true,
+      start: "23% top",
+      end: "55% top",
+      scrub: 1,
       // markers: true,
     },
     defaults: { duration: 5 },
-  });
+  };
+
+  // Check the screen width
+  if (window.innerWidth < 600) {
+    gsap.to(images, {
+      xPercent: -170 * (images.length - 1),
+      ...animationProps,
+    });
+  } else if (window.innerWidth >= 600 && window.innerWidth < 1200) {
+    gsap.to(images, {
+      xPercent: -150 * (images.length - 1),
+      ...animationProps,
+    });
+  } else {
+    gsap.to(images, {
+      xPercent: -60 * (images.length - 1),
+      ...animationProps,
+    });
+  }
 }
+
+// Call the function initially
 horizontalScroll();
+
+// function horizontalScroll() {
+//   // Check the screen width
+//   if (window.innerWidth < 1000 && window.innerWidth > 600) {
+//     gsap.to(".horizontal__content", {
+//       transform: "translateX(-185vw)",
+//       scrollTrigger: {
+//         trigger: "#main",
+//         start: "23% top",
+//         end: "55% top",
+//         scrub: 1,
+//         pin: true,
+//         markers: true,
+//       },
+//       defaults: { duration: 5 },
+//     });
+//   } else if (window.innerWidth < 1500 && window.innerWidth > 1000) {
+//     gsap.to(".horizontal__content", {
+//       transform: "translateX(-180%)",
+//       scrollTrigger: {
+//         trigger: "#main",
+//         start: "23% top",
+//         end: "55% top",
+//         scrub: 1,
+//         pin: true,
+//         markers: true,
+//       },
+//       defaults: { duration: 5 },
+//     });
+//   } else if (window.innerWidth < 600 && window.innerWidth > 500) {
+//     gsap.to(".horizontal__content", {
+//       transform: "translateX(-315%)",
+//       scrollTrigger: {
+//         trigger: "#main",
+//         start: "23% top",
+//         end: "55% top",
+//         scrub: 1,
+//         pin: true,
+//         markers: true,
+//       },
+//       defaults: { duration: 5 },
+//     });
+//   } else if (window.innerWidth < 500) {
+//     gsap.to(".horizontal__content", {
+//       transform: "translateX(-370%)",
+//       scrollTrigger: {
+//         trigger: "#main",
+//         start: "23% top",
+//         end: "55% top",
+//         scrub: 1,
+//         pin: true,
+//         markers: true,
+//       },
+//       defaults: { duration: 5 },
+//     });
+//   } else {
+//     gsap.to(".horizontal__content", {
+//       transform: "translateX(-45vw)",
+//       scrollTrigger: {
+//         trigger: "#main",
+//         start: "23% top",
+//         end: "55% top",
+//         scrub: 1,
+//         pin: true,
+//         markers: true,
+//       },
+//       defaults: { duration: 5 },
+//     });
+//   }
+// }
+// horizontalScroll();
 
 function curvedScroll() {
   // gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
@@ -267,7 +352,7 @@ function curvedScroll() {
     // markers: true,
   });
 }
-curvedScroll()
+curvedScroll();
 
 function bullStory() {
   ScrollTrigger.create({
@@ -276,27 +361,27 @@ function bullStory() {
     start: "46% top",
     end: "53% top",
     pin: true,
-  })
+  });
 
   gsap.to(".bullStoryOverlay", {
     scrollTrigger: {
-      trigger: '#main',
+      trigger: "#main",
       // markers:true,
       start: "46% top",
       end: "52% top",
       scrub: 2,
     },
-    top: "50%"
-  })
+    top: "60%",
+  });
 }
-bullStory()
+bullStory();
 
 function logoShrink() {
-  let section = document.getElementById('section'),
+  let section = document.getElementById("section"),
     dot = document.querySelector(".dot");
 
   gsap.set(dot, {
-    width: "142vmax", // ensures it fills every part of the screen. 
+    width: "142vmax", // ensures it fills every part of the screen.
     height: "142vmax",
     xPercent: -50, // center the dot in the section area
     yPercent: -50,
@@ -310,37 +395,40 @@ function logoShrink() {
       trigger: "#main",
       start: "57.5% top",
       end: "64% top",
-      // markers: true,
+      markers: true,
       scrub: 1.5,
       pin: true,
       pinSpacing: true,
       invalidateOnRefresh: true,
     },
-    defaults: { ease: "none" }
+    defaults: { ease: "none" },
   });
 
-  tl1
-    .fromTo(dot, {
+  tl1.fromTo(
+    dot,
+    {
       scale: 0,
-    }, {
+    },
+    {
       scale: 1,
       // ease: "power3.in",
-    });
+    }
+  );
 
-  tl1.to('.bullimg', { duration: 0.8, width: "15%", y: -250 }, '+.6')
-  tl1.to('.nameLogo', { duration: 0.8, y: -500 }, '+.6')
-  tl1.to('.logoTextSection', { duration: 0.8, y: -450 }, '+.9')
+  tl1.to(".bullimg", { duration: 0.8, width: "15%", y: -250 }, "+.6");
+  tl1.to(".nameLogo", { duration: 0.8, y: -500 }, "+.6");
+  tl1.to(".logoTextSection", { duration: 0.8, y: -450 }, "+.9");
 }
-logoShrink()
+logoShrink();
 
 function ecosystem() {
-  const cardContainer = document.querySelector('.card-container');
+  const cardContainer = document.querySelector(".card-container");
   const cardContainerWidth = cardContainer.offsetWidth;
 
-  const card1 = document.getElementById('card1');
+  const card1 = document.getElementById("card1");
   const card1Width = card1.offsetWidth;
 
-  const card2 = document.getElementById('card2');
+  const card2 = document.getElementById("card2");
   const card2Width = card2.offsetWidth;
 
   const EXPAND_WIDTH = cardContainerWidth * 0.1;
@@ -349,33 +437,26 @@ function ecosystem() {
     card1.style.width = `${card1Width + EXPAND_WIDTH}px`;
     card2.style.width = `${card2Width - EXPAND_WIDTH}px`;
 
-    card2.classList.add('bgimg-card');
-
+    card2.classList.add("bgimg-card");
   });
 
   card1.addEventListener("mouseleave", () => {
     card1.style.width = `${card1Width}px`;
     card2.style.width = `${card2Width}px`;
-    card1.classList.add('expandCard')
-    card2.classList.remove('bgimg-card');
-
+    card1.classList.add("expandCard");
+    card2.classList.remove("bgimg-card");
   });
-
 
   card2.addEventListener("mouseenter", () => {
     card2.style.width = `${card1Width + EXPAND_WIDTH}px`;
     card1.style.width = `${card2Width - EXPAND_WIDTH}px`;
-    card1.classList.add('bgimg-card');
-
+    card1.classList.add("bgimg-card");
   });
 
   card2.addEventListener("mouseleave", () => {
     card2.style.width = `${card1Width}px`;
     card1.style.width = `${card2Width}px`;
-    card1.classList.remove('bgimg-card');
-
+    card1.classList.remove("bgimg-card");
   });
-
-
 }
-ecosystem()
+ecosystem();

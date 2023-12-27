@@ -5,24 +5,24 @@
 }
 
 body {
+  overflow-x: hidden;
   height: 100%;
   width: 100%;
   font-family: "Montserrat", sans-serif;
-  overflow-x: hidden;
 }
 
-.cursor{
+.cursor {
   border-radius: 50%;
-    position: fixed;
-    z-index: 9;
-    background-color: #cda050;
-    height: 20px;
-    width: 20px;
-    left: -10%;
-    /* mix-blend-mode: difference; */
+  position: fixed;
+  z-index: 9;
+  background-color: #cda050;
+  height: 20px;
+  width: 20px;
+  left: -10%;
+  /* mix-blend-mode: difference; */
 }
 
-*::selection{
+*::selection {
   background-color: #cda050;
   color: #000000;
 }
@@ -34,12 +34,12 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #212121; 
+  background: #212121;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #cda050; 
+  background: #cda050;
   border-radius: 10px;
 }
 
@@ -119,11 +119,11 @@ body {
   height: auto;
 }
 .link {
-  height: 100px !important;
-  width: 40vw;
+  /* height: 100px !important; */
+  width: clamp(80vw, 6vw, 50vw);
   /* background-color: #cda050; */
   color: #fff;
-  font-size: 3rem;
+  font-size: clamp(1rem, 6vw, 3rem);
   text-align: center;
   display: flex;
   align-items: center;
@@ -132,11 +132,11 @@ body {
 }
 
 .splide__arrow--next {
-  margin-bottom: -12%;
+  margin-bottom: -5%;
 }
 
 .splide__arrow--prev {
-  margin-top: -10%;
+  margin-top: -5%;
 }
 /* -----------------Hero Section---------------- */
 
@@ -147,6 +147,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .navBar {
@@ -170,7 +171,8 @@ body {
 }
 
 .HeroHeading h1 {
-  font-size: 9vw;
+  /* font-size: 9vw; */
+  font-size: clamp(2.75rem, 12vw, 10rem);
   font-weight: 800;
   text-transform: uppercase;
   text-align: center;
@@ -203,7 +205,7 @@ body {
   z-index: 2;
 }
 
-.rollingImage{
+.rollingImage {
   position: absolute;
   top: 50%;
   left: 130%;
@@ -247,10 +249,11 @@ body {
   /* top: 10%; */
   /* 18% */
   bottom: -48%;
+  /* bottom: -8%; */
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  font-size: 3em;
+  font-size: clamp(1.5rem, 7vw, 4rem);
   text-align: center;
   z-index: 6;
   width: 70%;
@@ -266,11 +269,12 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow-x: hidden;
 }
 
 #horizontal h2 {
   text-align: center;
-  font-size: 3rem;
+  font-size: clamp(2.25rem, 7vw, 3.5rem);
   font-weight: 800;
   color: #000;
   padding-top: 5vh;
@@ -408,6 +412,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
   }
 
   .navBar {
@@ -427,19 +432,6 @@ body {
     scale: 0.65;
     /* background-color: black; */
     cursor: pointer;
-  }
-
-  .HeroHeading h1 {
-    font-size: 5vw;
-    font-weight: 800;
-    text-transform: uppercase;
-    text-align: center;
-    color: white;
-    z-index: 1;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
   }
 
   .imgBackgroundHero {
@@ -493,10 +485,9 @@ body {
     top: 0%;
   }
 
-  .videoOverlayText {
+  /* .videoOverlayText {
     position: absolute;
-    /* top: 10%; */
-    /* 18% */
+    
     bottom: -48%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -506,7 +497,7 @@ body {
     z-index: 6;
     width: 70%;
     transition: all ease 0.5s;
-  }
+  } */
 
   /* <!-- ----------------Page 1 - Video Section------------- --> */
 
@@ -519,13 +510,13 @@ body {
     justify-content: space-between;
   }
 
-  #horizontal h2 {
+  /* #horizontal h2 {
     text-align: center;
     font-size: 3rem;
     font-weight: 800;
     color: #000;
     padding-top: 5vh;
-  }
+  } */
 
   .horizontal__content {
     display: flex;
@@ -672,7 +663,6 @@ body {
   align-items: center;
   justify-content: center;
   height: 45%;
-
 }
 
 .slider-section {
@@ -773,12 +763,11 @@ body {
 
 /* <!-- --------------Curved Carousal Section---------- --> */
 
-
 /* ----------------Bull Image CSS ----------------- */
 
 /* -------------------------The Bull Story-------------------- */
 
-.bullStory{
+.bullStory {
   position: relative;
   height: 100vh;
   display: flex;
@@ -792,10 +781,10 @@ body {
 
 .bullStory h1 {
   text-transform: uppercase;
-  font-size: 12vw;
+  font-size: clamp(4rem, 10vw, 10rem);
   text-align: center;
   font-weight: 800;
-  line-height: 12vw;
+  /* line-height: 12vw; */
   overflow: hidden;
 }
 
@@ -807,30 +796,29 @@ body {
   justify-content: center;
   gap: 2rem;
   position: absolute;
-  transform: translate(-50%,-50%);
-  top:150%;
+  transform: translate(-50%, -50%);
+  top: 150%;
   left: 50%;
 }
 
 .bullStoryImage img {
-  width: 90%;
+  width: 50vw;
   display: block;
   margin: 0 auto;
 }
 
-.bullStoryText{
+.bullStoryText {
   text-align: center;
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
 }
 
-.bullStoryText p{
+.bullStoryText p {
   font-weight: 600;
 }
 
 /* -------------------------The Bull Story-------------------- */
-
 
 /* <!-- -------------------Logo Shrink Section------------------ --> */
 
@@ -893,7 +881,6 @@ body {
 
 /* <!-- -------------------Logo Shrink Section------------------ --> */
 
-
 /* <!-- ecosystem start --> */
 
 .ecosystemContainer {
@@ -908,7 +895,7 @@ body {
   justify-content: space-around;
 }
 
-.title{
+.title {
   font-size: 8vw;
   font-weight: 800;
   line-height: 7.5vw;
@@ -917,16 +904,16 @@ body {
   /* background-color: #CD9C49; */
 }
 
-.card-text-content{
+.card-text-content {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap:2%;
+  gap: 2%;
   /* background-color: blue; */
   margin-top: -3vw;
 }
 
-.text-container{
+.text-container {
   width: 40%;
   display: flex;
   flex-direction: column;
@@ -934,27 +921,24 @@ body {
   justify-content: flex-end;
 }
 
-.text-container h4{
+.text-container h4 {
   font-size: 1.2rem;
   font-weight: 600;
 }
 
-.text-container p{
+.text-container p {
   line-height: 1.3rem;
 }
 
-
-
-.card-container{
+.card-container {
   display: flex;
   width: calc(100% - 10%);
-  padding-left: 2% ;
+  padding-left: 2%;
   padding-right: 2%;
-  gap:2%
-
+  gap: 2%;
 }
 
-.card{
+.card {
   width: 35%;
   background-color: white;
   color: black;
@@ -966,49 +950,53 @@ body {
   transition: all ease 0.5s;
 }
 
-
-
-
 @keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-
-@media screen and (min-width:320px) and (max-width:768px) {
-  .ecosystemContainer{
-      height: 90vh;
-      align-items: center;
-      justify-content: space-evenly;
-      gap:2rem;
+  0% {
+    opacity: 0;
   }
-
-  .text-container{
-      margin-bottom: 20px;
-  }
-  .card-text-content{
-      flex-direction: column;
-  }
-
-  .text-container{
-      margin-bottom: 10px;
-  }
-  .card{
-      height: 170px;
-      font-size: small;
-  }
-
-  .card-container{
-      width: 100%;
-  }
-
-  .text-container{
-      width: 100%;
+  100% {
+    opacity: 1;
   }
 }
 
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .ecosystemContainer {
+    height: 90vh;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 2rem;
+  }
 
-.hidden-text{
+  .text-container {
+    margin-bottom: 20px;
+  }
+  .card-text-content {
+    flex-direction: column;
+  }
+
+  .text-container {
+    margin-bottom: 10px;
+  }
+  .card {
+    height: 170px;
+    font-size: small;
+  }
+
+  .card-container {
+    width: 100%;
+  }
+
+  .text-container {
+    width: 100%;
+  }
+
+  /* BULL IMAGE */
+  .bullStoryImage img {
+    width: 80vw;
+  }
+}
+
+.hidden-text {
   display: none;
 }
 
@@ -1018,22 +1006,21 @@ body {
   -webkit-animation: fadeIn 1s;
   -moz-animation: fadeIn 1s;
   -o-animation: fadeIn 1s;
-  -ms-animation: fadeIn 1s; 
+  -ms-animation: fadeIn 1s;
 }
 
-.card:hover .card-title{
+.card:hover .card-title {
   justify-content: space-between;
 }
 
-
-.bgimg-card{
+.bgimg-card {
   color: white;
   background-image: url(./images/forest.png);
   background-size: cover;
   background-position: center;
   -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);}
-
+  backdrop-filter: blur(5px);
+}
 
 .show-text {
   opacity: 1;
@@ -1045,30 +1032,29 @@ body {
 }
 
 @keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-
-
-
-.card-title{
+.card-title {
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.3rem;
   font-style: italic;
-  gap:1vw;
+  gap: 1vw;
   font-weight: 500;
   transition: all ease 0.5s;
 }
 
 /* <!-- ecosystem end --> */
 
-
-
 /* ---------global presence------- */
-.globalPresence{
+.globalPresence {
   height: 100vh;
   width: 100vw;
   position: relative;
@@ -1077,7 +1063,7 @@ body {
   flex-direction: column;
 }
 
-.globalPresenceContent{
+.globalPresenceContent {
   display: flex;
   flex-direction: row;
   height: 35vh;
@@ -1088,13 +1074,12 @@ body {
   gap: 4vw;
 }
 
-.globalPresenceContent p{
+.globalPresenceContent p {
   /* background: #bc6161; */
   line-height: 2vw;
-  
 }
 
-.globalPresenceContent h1{
+.globalPresenceContent h1 {
   font-size: 6vw;
   line-height: 6vw;
   text-transform: uppercase;
@@ -1105,25 +1090,21 @@ body {
   overflow-y: hidden;
 }
 
-.globalPresenceImage img{
+.globalPresenceImage img {
   /* scale:0.7; */
   height: 90%;
   /* width: 100%; */
   /* background-color: #a90000; */
   padding: 1vw 0;
-
 }
 
-.globalPresenceImage{
+.globalPresenceImage {
   height: 65vh;
   /* background-color: rgb(192, 204, 27); */
   padding-left: 16vw;
 }
 
 /* ---------global presence------- */
-
-
-
 
 /* ---------Footer-------- */
 
@@ -1154,10 +1135,10 @@ footer {
   transition: all ease 0.3s;
 }
 
-.footerTop button:hover{
-  border: 1px solid #CD9C49;
+.footerTop button:hover {
+  border: 1px solid #cd9c49;
   background-color: #ffffff27;
-  color: #CD9C49;
+  color: #cd9c49;
 }
 
 .footerBottom {
@@ -1167,19 +1148,19 @@ footer {
   font-size: 0.8vw;
 }
 
-.footerBottomLeft{
+.footerBottomLeft {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.footerMiddle{
+.footerMiddle {
   padding: 0;
 }
 
 /* -----------Scroller (Marquee)---------- */
 
-.scroller{
+.scroller {
   /* background-color: red; */
   white-space: nowrap;
   overflow: hidden;
@@ -1188,7 +1169,7 @@ footer {
   margin-bottom: 15px;
 }
 
-.scroller-in{
+.scroller-in {
   display: inline-block;
   white-space: nowrap;
   animation-name: scroll;
@@ -1197,7 +1178,7 @@ footer {
   animation-iteration-count: infinite;
 }
 
-.scroller h4{
+.scroller h4 {
   display: inline-block;
   font-size: 6.5vw;
   font-weight: 800;
@@ -1206,27 +1187,26 @@ footer {
   font-style: italic;
 }
 
-@keyframes scroll{
-  from{
-      transform: translateX(0);
+@keyframes scroll {
+  from {
+    transform: translateX(0);
   }
-  to{
-      transform: translateX(-100%);
+  to {
+    transform: translateX(-100%);
   }
 }
 
 @media only screen and (max-width: 600px) {
-  .scroller h4{
-      font-size: 4rem;
+  .scroller h4 {
+    font-size: 4rem;
   }
 
-  .footerBottom{
-      font-size: 0.6rem;
+  .footerBottom {
+    font-size: 0.6rem;
   }
 
   .footerTop button {
-      font-size: 0.5rem;
+    font-size: 0.5rem;
   }
-
 }
 /* ------------Footer----------- */
