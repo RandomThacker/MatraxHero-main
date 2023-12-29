@@ -840,7 +840,7 @@ body {
 
 .card-container {
   display: flex;
-  width: calc(100% - 10w);
+  width: calc(100% - 10%);
   padding-left: 2%;
   padding-right: 2%;
   gap: 2%;
