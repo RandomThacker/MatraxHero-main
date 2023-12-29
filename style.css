@@ -121,10 +121,10 @@ body {
 }
 .link {
   /* height: 100px !important; */
-  width: 40vw;
+  width: clamp(80vw, 6vw, 50vw);
   /* background-color: #cda050; */
   color: #fff;
-  font-size: 3rem;
+  font-size: clamp(1rem, 6vw, 3rem);
   text-align: center;
   display: flex;
   align-items: center;
