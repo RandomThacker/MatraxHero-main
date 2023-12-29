@@ -147,6 +147,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .navBar {
@@ -170,7 +171,7 @@ body {
 }
 
 .HeroHeading h1 {
-  font-size: 9vw;
+  font-size: clamp(2.75rem, 12vw, 10rem);
   font-weight: 800;
   text-transform: uppercase;
   text-align: center;
