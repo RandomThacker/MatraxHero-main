@@ -45,23 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-// gsap.to(".rollingImage", {
-//   left:"50%",
-//   rotate: -360,
-//   // repeat:-1,
-//   duration: 4
-// })
-
-// gsap.to(".rollingImage", {
-//   display:"none",
-//   delay: 4
-// })
-
-// gsap.from(".heroCanvas", {
-//   display:"none",
-//   delay: 4
-// })
-
 gsap.from(".heroCanvas", {
   x: 1300,
   rotate: 360,
@@ -88,8 +71,7 @@ function dom() {
 
   function files(index) {
     const data = `
-      ./images/SequenceImages/jlsousa tires project 4  Urcola+.3117.${
-        31 + index
+      ./images/SequenceImages/jlsousa tires project 4  Urcola+.3117.${31 + index
       }.webp
       `;
     return data.trim();
@@ -210,69 +192,81 @@ function horizontalScroll() {
 }
 horizontalScroll();
 
-function curvedScroll() {
-  // gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
+function curvedScroll(){
+  gsap.registerPlugin(ScrollTrigger);
 
-  const cardAnimationTimeline = gsap.timeline({
-    paused: true,
-    id: "cardAnimation",
+const slides = gsap.utils.toArray(".single-item");
+const animation = () => {
+  gsap.set(".carrousel-wrappper", {
+    xPercent: -50,
+    yPercent: -4,
+    width: `${slides.length * 350}px`,
+    height: `${slides.length * 350}px`
   });
+  circleSetup(".carrousel-wrappper", ".single-item", -50);
 
-  function updateStagger() {
-    const screenWidth = window.innerWidth;
+  // ScrollTrigger.create({
+  //   trigger: "#main",
+  //     // pin: true,
+  //     start: "34.49% top",
+  //     end: "55% top",
+  //   markers: true,
+  //   onUpdate: (self) => {
+  //     gsap.set(".carrousel-wrappper", { rotation: self.progress * 200 });
+  //   }
+  // });
+};
 
-    let staggerValue;
-
-    if (screenWidth < 500) {
-      staggerValue = 3;
-    } else if (screenWidth >= 500 && screenWidth < 800) {
-      staggerValue = 1.5;
-    } else if (screenWidth >= 800 && screenWidth < 1500) {
-      staggerValue = 1;
-    } else {
-      staggerValue = 0.9; // Default value for larger screens
-    }
-
-    cardAnimationTimeline.to(".durable-card", {
-      motionPath: {
-        path: "#path",
-        align: "#path",
-        alignOrigin: [1.2, 1.5],
-        // set x of align origin to 1.2 so it goes behind the screen
-        autoRotate: true,
-        start: 0,
-        end: 1,
-      },
-      transformOrigin: "50% 50%",
-      duration: 3,
-      ease: "power1.inOut",
-      stagger: staggerValue, // Change stagger value based on screen width
-    });
-    // cardAnimationTimeline.reverse();
-  }
-
-  // Initial stagger setup
-  updateStagger();
-
-  // Update stagger on window resize
-  window.addEventListener("resize", updateStagger);
-
-  ScrollTrigger.create({
-    animation: cardAnimationTimeline,
-    trigger: "#main",
+gsap.to(".curvedScroll",{
+  scrollTrigger:{
+  trigger: "#main",
     pin: true,
     start: "34.49% top",
     end: "55% top",
-    scrub: true,
-    // markers: true,
+  markers: true,
+  onUpdate: (self) => {
+    gsap.set(".carrousel-wrappper", { rotation: self.progress * 200 });
+  }
+  }
+});
+
+/// set slides around the circle
+const circleSetup = (circle, items, percentageValue) => {
+  const mainCicle = document.querySelector(circle);
+  const circleItem = gsap.utils.toArray(items);
+
+  const radius = mainCicle.offsetWidth / 2;
+  const center = mainCicle.offsetWidth / 2;
+  const total = circleItem.length;
+  const slice = (-1.3 * Math.PI) / total;
+
+  circleItem.forEach((item, i) => {
+    const angle = i * slice;
+
+    const x = center + radius * Math.sin(angle);
+    const y = center - radius * Math.cos(angle);
+
+    gsap.set(item, {
+      rotation: angle + "_rad",
+      xPercent: percentageValue,
+      yPercent: percentageValue,
+      x,
+      y
+    });
   });
+};
+
+window.addEventListener("load", () => {
+  animation();
+  gsap.set("main", { autoAlpha: 1 });
+});
 }
 curvedScroll()
 
 function bullStory() {
   ScrollTrigger.create({
     trigger: "#main",
-    // markers: true,
+    markers: true,
     start: "46% top",
     end: "53% top",
     pin: true,
@@ -281,7 +275,7 @@ function bullStory() {
   gsap.to(".bullStoryOverlay", {
     scrollTrigger: {
       trigger: '#main',
-      // markers:true,
+      markers:true,
       start: "46% top",
       end: "52% top",
       scrub: 2,
