@@ -119,7 +119,7 @@ body {
   height: auto;
 }
 .link {
-  height: 100px !important;
+  /* height: 100px !important; */
   width: 40vw;
   /* background-color: #cda050; */
   color: #fff;
@@ -132,11 +132,11 @@ body {
 }
 
 .splide__arrow--next {
-  margin-bottom: -12%;
+  margin-bottom: -5%;
 }
 
 .splide__arrow--prev {
-  margin-top: -10%;
+  margin-top: -5%;
 }
 /* -----------------Hero Section---------------- */
 
