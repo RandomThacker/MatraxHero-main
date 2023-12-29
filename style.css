@@ -470,6 +470,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow-x: hidden;
   }
 
   /* #horizontal h2 {
@@ -880,6 +881,11 @@ body {
     display: none;
   }
 
+
+  .single-item{
+    width: 290px;
+  }
+
   #section img {
     width: 90%;
     /* scale: 3; */
@@ -1052,6 +1058,68 @@ body {
   height: 65vh;
   /* background-color: rgb(192, 204, 27); */
   padding-left: 16vw;
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .globalPresenceContent {
+    flex-direction: column;
+    height: 45vh;
+    /* background-color: cornflowerblue; */
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+  .globalPresenceContent h1 {
+    font-size: 12vw;
+    line-height: 12vw;
+    text-align: center;
+    /* background-color: aqua; */
+    overflow-y: hidden;
+  }
+
+  .globalPresenceContent p {
+    line-height: 4vw;
+    font-size: 4vw;
+    padding: 0 2vw;
+    text-align: center;
+  }
+
+  .globalPresenceImage img {
+    /* scale:0.7; */
+    /* height: 90%; */
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    /* width: 100%; */
+    /* background-color: #a90000; */
+    padding: 1vw 0;
+  }
+  
+  .globalPresenceImage {
+    /* overflow-x: scroll; */
+    height: 55vh;
+    padding-left: 0;
+  }
+
+  .title {
+    font-size: 12vw;
+    line-height: 11.5vw;
+    overflow: hidden;
+    margin-top: 15vw;
+    /* background-color: #CD9C49; */
+  }
+  
+  .ecosystemContainer {
+    justify-content: start;
+  }
+
+  .text-container{
+    margin-top: 15vw;
+    margin-bottom: 15vw;
+  }
+  
+
+
 }
 
 /* ---------global presence------- */

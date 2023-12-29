@@ -210,7 +210,7 @@ function horizontalScroll() {
     });
   } else {
     gsap.to(images, {
-      xPercent: -70 * (images.length - 1),
+      xPercent: -50 * (images.length - 1),
       ...animationProps,
     });
   }
@@ -223,19 +223,19 @@ function curvedScroll() {
 
   const slides = gsap.utils.toArray(".single-item");
 
-  var xPercentValue;
+  var yPercentValue;
   if (window.innerWidth < 600) {
     // Adjust for small screens
-    xPercentValue = 0;
+    yPercentValue = 0;
   } else {
     // Default value for larger screens
-    xPercentValue = -50;
+    yPercentValue = -4;
   }
 
     const animation = () => {
       gsap.set(".carrousel-wrappper", {
-        xPercent: xPercentValue,
-        yPercent: -4,
+        xPercent: -50,
+        yPercent: yPercentValue,
         width: `${slides.length * 350}px`,
         height: `${slides.length * 350}px`
       });
