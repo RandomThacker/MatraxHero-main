@@ -349,12 +349,10 @@ function logoShrink() {
     });
 
     if (window.innerWidth < 600) {
-      console.log("Small screen condition");
-      tl1.to(".bullimg", { duration: 0.8, width: "95%", y: -500 }, "+.6");
-      tl1.to(".nameLogo", { duration: 0.8, y: 150 }, "+.6");
+      tl1.to(".bullimg", { duration: 0.8, width: "55%", y: -300 }, "+.6");
+      tl1.to(".nameLogo", { duration: 0.8, y: -650 }, "+.6");
       tl1.to(".logoTextSection", { duration: 0.8, y: -600 }, "+.9");
     } else {
-      console.log("Large screen condition");
       tl1.to(".bullimg", { duration: 0.8, width: "15%", y: -250 }, "+.6");
       tl1.to(".nameLogo", { duration: 0.8, y: -500 }, "+.6");
       tl1.to(".logoTextSection", { duration: 0.8, y: -450 }, "+.9");
@@ -364,13 +362,13 @@ function logoShrink() {
 logoShrink()
 
 function ecosystem() {
-  const cardContainer = document.querySelector('.card-container');
+  const cardContainer = document.querySelector(".card-container");
   const cardContainerWidth = cardContainer.offsetWidth;
 
-  const card1 = document.getElementById('card1');
+  const card1 = document.getElementById("card1");
   const card1Width = card1.offsetWidth;
 
-  const card2 = document.getElementById('card2');
+  const card2 = document.getElementById("card2");
   const card2Width = card2.offsetWidth;
 
   const EXPAND_WIDTH = cardContainerWidth * 0.1;
@@ -379,33 +377,26 @@ function ecosystem() {
     card1.style.width = `${card1Width + EXPAND_WIDTH}px`;
     card2.style.width = `${card2Width - EXPAND_WIDTH}px`;
 
-    card2.classList.add('bgimg-card');
-
+    card2.classList.add("bgimg-card");
   });
 
   card1.addEventListener("mouseleave", () => {
     card1.style.width = `${card1Width}px`;
     card2.style.width = `${card2Width}px`;
-    card1.classList.add('expandCard')
-    card2.classList.remove('bgimg-card');
-
+    card1.classList.add("expandCard");
+    card2.classList.remove("bgimg-card");
   });
-
 
   card2.addEventListener("mouseenter", () => {
     card2.style.width = `${card1Width + EXPAND_WIDTH}px`;
     card1.style.width = `${card2Width - EXPAND_WIDTH}px`;
-    card1.classList.add('bgimg-card');
-
+    card1.classList.add("bgimg-card");
   });
 
   card2.addEventListener("mouseleave", () => {
     card2.style.width = `${card1Width}px`;
     card1.style.width = `${card2Width}px`;
-    card1.classList.remove('bgimg-card');
-
+    card1.classList.remove("bgimg-card");
   });
-
-
 }
 ecosystem()
