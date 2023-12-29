@@ -914,9 +914,9 @@ body {
   }
 
   .ecosystemContainer {
-    height: 90vh;
+    height: 100vh;
     align-items: center;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
     gap: 2rem;
   }
 
@@ -926,18 +926,26 @@ body {
 
   .text-container {
     margin-bottom: 20px;
+    text-align: center;
   }
   .card-text-content {
     flex-direction: column;
   }
 
   .text-container {
-    margin-bottom: 10px;
+    margin-bottom: 40px;
   }
   .card {
     height: 170px;
     font-size: small;
   }
+
+  .card-container{
+    padding-top: 10vw;
+
+  }
+
+ 
 
   .card-container {
     width: 100%;
