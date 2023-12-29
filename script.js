@@ -192,7 +192,7 @@ function horizontalScroll() {
       start: "23% top",
       end: "40% top",
       scrub: 1,
-      markers: true,
+      // markers: true,
     },
     defaults: { duration: 5 },
   };
@@ -250,7 +250,7 @@ function curvedScroll() {
       pin: true,
       start: "34.49% top",
       end: "55% top",
-      markers: true,
+      // markers: true,
       onUpdate: (self) => {
         gsap.set(".carrousel-wrappper", { rotation: self.progress * 200 });
       }
@@ -293,7 +293,7 @@ curvedScroll()
 function bullStory() {
   ScrollTrigger.create({
     trigger: "#main",
-    markers: true,
+    // markers: true,
     start: "46% top",
     end: "53% top",
     pin: true,
@@ -302,7 +302,7 @@ function bullStory() {
   gsap.to(".bullStoryOverlay", {
     scrollTrigger: {
       trigger: '#main',
-      markers: true,
+      // markers: true,
       start: "46% top",
       end: "52% top",
       scrub: 2,
