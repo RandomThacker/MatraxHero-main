@@ -170,96 +170,123 @@ function videoSection() {
   });
 
 
-  tl1.to(".videoOverlay", { opacity: 0.85 }, "+.4");
-  tl1.to(".videoOverlayText", { bottom: "18%", duration: 8 }, "+.8");
+  if (window.innerWidth < 600) {
+    tl1.to(".videoOverlay", { opacity: 0.85 }, "+.4");
+    tl1.to(".videoOverlayText", { bottom: "40%", duration: 8 }, "+.8");
+  } else {
+    tl1.to(".videoOverlay", { opacity: 0.85 }, "+.4");
+    tl1.to(".videoOverlayText", { bottom: "30%", duration: 8 }, "+.8");
+  }
+
+
 }
 videoSection();
 
 function horizontalScroll() {
-  gsap.to(".horizontal__content", {
-    transform: "translateX(-20%)",
+  let images = gsap.utils.toArray(".horizontal__item");
+  let animationProps = {
+    ease: "none",
     scrollTrigger: {
       trigger: "#main",
-      start: "23% top",
-      end: "32% top",
-      // scroller:"body",
-      scrub: 3,
       pin: true,
-      // markers: true,
+      start: "23% top",
+      end: "40% top",
+      scrub: 1,
+      markers: true,
     },
     defaults: { duration: 5 },
-  });
+  };
+
+  // Check the screen width
+  if (window.innerWidth < 600) {
+    gsap.to(images, {
+      xPercent: -160 * (images.length - 1),
+      ...animationProps,
+    });
+  } else if (window.innerWidth >= 600 && window.innerWidth < 1200) {
+    gsap.to(images, {
+      xPercent: -150 * (images.length - 1),
+      ...animationProps,
+    });
+  } else {
+    gsap.to(images, {
+      xPercent: -70 * (images.length - 1),
+      ...animationProps,
+    });
+  }
 }
+
 horizontalScroll();
 
-function curvedScroll(){
+function curvedScroll() {
   gsap.registerPlugin(ScrollTrigger);
 
-const slides = gsap.utils.toArray(".single-item");
-const animation = () => {
-  gsap.set(".carrousel-wrappper", {
-    xPercent: -50,
-    yPercent: -4,
-    width: `${slides.length * 350}px`,
-    height: `${slides.length * 350}px`
+  const slides = gsap.utils.toArray(".single-item");
+
+  var xPercentValue;
+  if (window.innerWidth < 600) {
+    // Adjust for small screens
+    xPercentValue = 0;
+  } else {
+    // Default value for larger screens
+    xPercentValue = -50;
+  }
+
+    const animation = () => {
+      gsap.set(".carrousel-wrappper", {
+        xPercent: xPercentValue,
+        yPercent: -4,
+        width: `${slides.length * 350}px`,
+        height: `${slides.length * 350}px`
+      });
+      circleSetup(".carrousel-wrappper", ".single-item", -50);
+    };
+   
+  
+
+  gsap.to(".curvedScroll", {
+    scrollTrigger: {
+      trigger: "#main",
+      pin: true,
+      start: "34.49% top",
+      end: "55% top",
+      markers: true,
+      onUpdate: (self) => {
+        gsap.set(".carrousel-wrappper", { rotation: self.progress * 200 });
+      }
+    }
   });
-  circleSetup(".carrousel-wrappper", ".single-item", -50);
 
-  // ScrollTrigger.create({
-  //   trigger: "#main",
-  //     // pin: true,
-  //     start: "34.49% top",
-  //     end: "55% top",
-  //   markers: true,
-  //   onUpdate: (self) => {
-  //     gsap.set(".carrousel-wrappper", { rotation: self.progress * 200 });
-  //   }
-  // });
-};
+  /// set slides around the circle
+  const circleSetup = (circle, items, percentageValue) => {
+    const mainCicle = document.querySelector(circle);
+    const circleItem = gsap.utils.toArray(items);
 
-gsap.to(".curvedScroll",{
-  scrollTrigger:{
-  trigger: "#main",
-    pin: true,
-    start: "34.49% top",
-    end: "55% top",
-  markers: true,
-  onUpdate: (self) => {
-    gsap.set(".carrousel-wrappper", { rotation: self.progress * 200 });
-  }
-  }
-});
+    const radius = mainCicle.offsetWidth / 2;
+    const center = mainCicle.offsetWidth / 2;
+    const total = circleItem.length;
+    const slice = (-1.3 * Math.PI) / total;
 
-/// set slides around the circle
-const circleSetup = (circle, items, percentageValue) => {
-  const mainCicle = document.querySelector(circle);
-  const circleItem = gsap.utils.toArray(items);
+    circleItem.forEach((item, i) => {
+      const angle = i * slice;
 
-  const radius = mainCicle.offsetWidth / 2;
-  const center = mainCicle.offsetWidth / 2;
-  const total = circleItem.length;
-  const slice = (-1.3 * Math.PI) / total;
+      const x = center + radius * Math.sin(angle);
+      const y = center - radius * Math.cos(angle);
 
-  circleItem.forEach((item, i) => {
-    const angle = i * slice;
-
-    const x = center + radius * Math.sin(angle);
-    const y = center - radius * Math.cos(angle);
-
-    gsap.set(item, {
-      rotation: angle + "_rad",
-      xPercent: percentageValue,
-      yPercent: percentageValue,
-      x,
-      y
+      gsap.set(item, {
+        rotation: angle + "_rad",
+        xPercent: percentageValue,
+        yPercent: percentageValue,
+        x,
+        y
+      });
     });
-  });
-};
+  };
 
-window.addEventListener("load", () => {
-  animation();
-  gsap.set("main", { autoAlpha: 1 });
-});
+  window.addEventListener("load", () => {
+    animation();
+    gsap.set("main", { autoAlpha: 1 });
+  });
 }
 curvedScroll()
 
@@ -275,12 +302,12 @@ function bullStory() {
   gsap.to(".bullStoryOverlay", {
     scrollTrigger: {
       trigger: '#main',
-      markers:true,
+      markers: true,
       start: "46% top",
       end: "52% top",
       scrub: 2,
     },
-    top: "50%"
+    top: "60%"
   })
 }
 bullStory()
@@ -321,9 +348,18 @@ function logoShrink() {
       // ease: "power3.in",
     });
 
-  tl1.to('.bullimg', { duration: 0.8, width: "15%", y: -250 }, '+.6')
-  tl1.to('.nameLogo', { duration: 0.8, y: -500 }, '+.6')
-  tl1.to('.logoTextSection', { duration: 0.8, y: -450 }, '+.9')
+    if (window.innerWidth < 600) {
+      console.log("Small screen condition");
+      tl1.to(".bullimg", { duration: 0.8, width: "95%", y: -500 }, "+.6");
+      tl1.to(".nameLogo", { duration: 0.8, y: 150 }, "+.6");
+      tl1.to(".logoTextSection", { duration: 0.8, y: -600 }, "+.9");
+    } else {
+      console.log("Large screen condition");
+      tl1.to(".bullimg", { duration: 0.8, width: "15%", y: -250 }, "+.6");
+      tl1.to(".nameLogo", { duration: 0.8, y: -500 }, "+.6");
+      tl1.to(".logoTextSection", { duration: 0.8, y: -450 }, "+.9");
+    }
+    
 }
 logoShrink()
 
