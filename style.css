@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 body {
@@ -708,7 +709,7 @@ body {
 }
 
 .bullStoryImage img {
-  width: 50vw;
+  width: 40vw;
   display: block;
   margin: 0 auto;
 }
@@ -877,7 +878,7 @@ body {
 
   #section img {
     width: 90%;
-    scale: 3;
+    /* scale: 3; */
   }
 
   .bottomTextSection {
